@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAll } from "../../utils/Books-Api";
 
-import CurrentlyReading from "../sections/CurrentlyReading";
+import ShelfSection from "../section/ShelfSection";
 import Header from "../UI/Header";
 import './Home.css';
 
@@ -27,11 +27,30 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Header />
+      <Header path="/" />
       <main>
-        <CurrentlyReading books={books} loading={isLoading} />
+        <ShelfSection
+          books={books}
+          loading={isLoading}
+          shelfTitle="Currently Reading"
+          shelf="currentlyReading"
+        />
+        <ShelfSection
+          books={books}
+          loading={isLoading}
+          shelfTitle="Want To Read"
+          shelf="wantToRead"
+        />
+        <ShelfSection
+          books={books}
+          loading={isLoading}
+          shelfTitle="Read"
+          shelf="read"
+        />
         <div className="link-container">
-          <Link to="/search" className="link">+</Link>
+          <Link to="/search" className="link">
+            +
+          </Link>
         </div>
       </main>
     </Fragment>

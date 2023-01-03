@@ -1,0 +1,22 @@
+section {
+  padding: 20px 5% 0;
+}
+
+h2 {
+  color: #6C3483;
+  margin: 0;
+  padding: 0;
+}
+
+section .books-container {
+  padding-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section .loading {
+  color: #6C3483;
+  font-size: 1.6rem;
+}
