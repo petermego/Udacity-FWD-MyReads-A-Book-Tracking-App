@@ -1,0 +1,35 @@
+section {
+  padding: 20px 5% 0;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+section .books-container {
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section .loading {
+  color: #6C3483;
+  font-size: 1.6rem;
+}
+
+section form select {
+  position: absolute;
+  right: -10px;
+  top: 8.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #6C3483;
+  color: #fff;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+}
