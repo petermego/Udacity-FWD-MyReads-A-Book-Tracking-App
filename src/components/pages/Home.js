@@ -10,11 +10,11 @@ import './Home.css';
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [bookStatus, setBookStatus] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const resevedBooks = await getAll();
-      console.log(resevedBooks);
       setBooks(resevedBooks);
       setIsLoading(false);
     }
@@ -23,29 +23,35 @@ const Home = () => {
     } catch (error) {
       throw new Error(error);
     }
-  }, []);
+  }, [bookStatus]);
 
   return (
     <Fragment>
       <Header path="/" />
-      <main>
+      <main className="home">
         <ShelfSection
           books={books}
           loading={isLoading}
           shelfTitle="Currently Reading"
           shelf="currentlyReading"
+          bookStatus={setBookStatus}
+          status={bookStatus}
         />
         <ShelfSection
           books={books}
           loading={isLoading}
           shelfTitle="Want To Read"
           shelf="wantToRead"
+          bookStatus={setBookStatus}
+          status={bookStatus}
         />
         <ShelfSection
           books={books}
           loading={isLoading}
           shelfTitle="Read"
           shelf="read"
+          bookStatus={setBookStatus}
+          status={bookStatus}
         />
         <div className="link-container">
           <Link to="/search" className="link">

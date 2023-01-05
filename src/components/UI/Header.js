@@ -1,18 +1,41 @@
-import { useRef } from 'react';
+import { Link } from "react-router-dom";
+import { search } from "../../utils/Books-Api";
 
 import './Header.css';
 
 const Header = (props) => {
-  const searchInputRef = useRef();
 
-  const searchInputHandler = () => {
-    console.log(searchInputRef.current.value);
+  const searchInputHandler = async(e) => {
+    let books
+    try {
+      if (e.target.value.trim()) {
+        const retrievedBooks = await search(e.target.value);
+        if (retrievedBooks.error)return;
+        if (e.target.value === '') {
+          return await props.bookState(null);
+        }
+        await props.bookState(retrievedBooks);
+        books = retrievedBooks;
+        // props.searchingStatus();
+      }
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      console.log(books);
+    }
   };
 
   if (props.path === "/search") {
     return (
       <header>
-        <input type="text" onChange={searchInputHandler} ref={searchInputRef} />
+        <div className="link-container__header">
+          <Link className="home-link__header" to="/">&#8592;</Link>
+        </div>
+        <input
+          type="text"
+          placeholder="Enter Book Name..."
+          onChange={searchInputHandler}
+        />
       </header>
     );
   }

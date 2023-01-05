@@ -5,40 +5,50 @@ import './Section.css';
 
 const ShelfSection = (props) => {
   const [shelfBooks, setShelfBooks] = useState([]);
+  const {status, bookStatus} = props;
 
   useEffect(() => {
-    const currentlyReadingFilter = async () => {
+    const statusFilter = async () => {
       const books = await props.books;
       const filteredBooks = await books.filter(book => book.shelf === props.shelf);
-      setShelfBooks(filteredBooks);
+      await setShelfBooks(filteredBooks);
+      bookStatus(true);
+      await console.log(filteredBooks);
     };
 
     try {
-      currentlyReadingFilter();
+      statusFilter();
     } catch (error) {
       throw new Error(error);
     }
-  }, [props.books, props.shelf]);
+  }, [props.books, props.shelf, status, bookStatus]);
 
-  return (
-    <section>
-      <h2>{props.shelfTitle}</h2>
-      <hr />
-      <div className="books-container">
-        {props.loading && <p className="loading">Loading...</p>}
-        {!props.loading &&
-          shelfBooks.map((book) => (
-            <BookCard
-             key={book.id}
-             thumbnail={book.imageLinks.thumbnail}
-             alt={book.title}
-             bookTitle={book.title}
-             authors={book.authors}
-            />
-          ))}
-      </div>
-    </section>
-  );
+  if (!shelfBooks)return;
+
+    return (
+      <section>
+        <h2>{props.shelfTitle}</h2>
+        <hr />
+        <div className="books-container">
+          {props.loading && <p className="loading">Loading...</p>}
+          {!props.loading &&
+            shelfBooks.map(book => (
+              <BookCard
+                key={book.id}
+                id={book.id}
+                thumbnail={book.imageLinks.thumbnail}
+                alt={book.title}
+                bookTitle={book.title}
+                authors={book.authors}
+                book={book}
+                bookStatus={props.bookStatus}
+                shelf={props.shelf}
+                path="/"
+              />
+            ))}
+        </div>
+      </section>
+    );
 }
  
 export default ShelfSection;
