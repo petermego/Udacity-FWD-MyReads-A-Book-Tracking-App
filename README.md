@@ -1,7 +1,8 @@
 # Udacity-FWD-MyReads-A-Book-Tracking-App
 Book Tracking App contributed by React with Udacity EGY FWD React cross-skilling nanodegree.
+there's three categories for sorting books want to read, reading, read and a searching for book ability to add.
 
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
